@@ -12,14 +12,26 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     console.log('Connected to MongoDB server');
     const db = client.db('TodoApp')
 
-    db.collection('Todos').find({
-            _id: new ObjectID('5b4a0cb4ea499e5f64132213')
-        }).toArray().then((docs) => {
-        console.log('Todos');
-        console.log(JSON.stringify(docs, undefined, 2));
-    }, (err) => {
-        console.log('Unable to fetch Todos', err);
-    });
+    //deleteMany
+    // db.collection('Todos').deleteMany({text: 'Eat brains'}).then((result) => {
+    //     console.log(result);
+    // }, (err) => {
+    //     console.log('Unable to delete', err);
+    // });
+
+    //deleteOne
+    // db.collection('Todos').deleteOne({text: 'something to do'}).then((result) => {
+    //     console.log(result);
+    // }, (err) => {
+    //     console.log('Unable to delete', err);
+    // });
+
+    //findOneAndDelete
+    // db.collection('Todos').findOneAndDelete({text: 'Eat brains'}).then((result) => {
+    //     console.log(result);
+    // }, (err) => {
+    //     console.log('Unable to delete', err);
+    // });
 
     db.collection('Todos').find().count().then((count) => {
         console.log(`Todos count ${count}`);
