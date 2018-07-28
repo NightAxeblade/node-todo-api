@@ -9,28 +9,36 @@ var app = express();
 
 app.use(bodyParser.json());
 
-// app.post('/todos', (req, res) => {
-//     var todo = new Todo({
-//         text: req.body.text
-//     });
-//     todo.save().then((doc) => {
-//         res.status(200).send(doc);
-//     }, (e) => {
-//         res.status(400).send(e);
-//     });
-// });
-
-app.post('/user', (req, res) => {
-    var user = new User({
-        name: req.body.name
+app.post('/todos', (req, res) => {
+    var todo = new Todo({
+        text: req.body.text
     });
-
-    user.save().then((doc) => {
+    todo.save().then((doc) => {
         res.status(200).send(doc);
     }, (e) => {
         res.status(400).send(e);
     });
 });
+
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos) => {
+      res.send({todos});
+    }, (e) => {
+      res.status(400).send(e);
+    })
+  });
+
+// app.post('/user', (req, res) => {
+//     var user = new User({
+//         name: req.body.name
+//     });
+
+//     user.save().then((doc) => {
+//         res.status(200).send(doc);
+//     }, (e) => {
+//         res.status(400).send(e);
+//     });
+// });
 
 
 
@@ -38,3 +46,5 @@ app.post('/user', (req, res) => {
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 })
+
+module.exports = {app};
